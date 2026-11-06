@@ -172,6 +172,13 @@
     font-size: 14px; transition: color .15s ease;
   }
   .row:last-child { border-bottom: none; }
+  /* 长列表：框内滚动 */
+  .rows.scroll { max-height: 342px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  .rows.scroll::-webkit-scrollbar { width: 7px; }
+  .rows.scroll::-webkit-scrollbar-track { background: transparent; }
+  .rows.scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; border: 2px solid var(--surface); }
+  .rows.scroll::-webkit-scrollbar-thumb:hover { background: var(--accent-2); }
+  .rows.scroll .row { padding-right: 8px; }
   .row:hover { color: var(--accent); }
   .row .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); flex-shrink: 0; }
   .row .rt { flex: 1; line-height: 1.5; }
@@ -698,6 +705,7 @@
     { n: "买手主动退供", u: "https://oms.kuajing.team/container/wms/refund-mgt/req-mgt", ic: "↩️", tag: "退供" },
     { n: "入库质检明细页", u: "https://oms.kuajing.team/container/qc/qc-bulk", ic: "📋", tag: "质检" },
     { n: "备货单跟进页", u: "https://oms.temu.team/app/stock/fully-mgt/process/stock", ic: "📦", tag: "备货" },
+    { n: "站点拉黑申请", s: "需向前加签lvy.hu", u: "https://oms.temu.team/govern/exemption-blacklist", ic: "🚫", tag: "申请" },
     { n: "商品流量 case 排查需求（Brook）", s: "权限申请与需求创建流程", page: "brook", ic: "🧭", tag: "分页" }
   ];
 
@@ -706,9 +714,9 @@
     { id: "survey", title: "问卷", desc: "申请与信息提交", type: "cards", items: [
       { n: "下单问卷", s: "需按照格式填写SKUID+数量，需复制链接发给商家", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=235094639557", ic: "📋", copy: true }
     ] },
-    { id: "note", title: "常用 note及文件", desc: "标签合规、加白解标、仓库与店铺对接", type: "rows", items: NOTES_ITEMS },
+    { id: "note", title: "常用 note及文件", desc: "标签合规、加白解标、仓库与店铺对接", type: "rows", scroll: true, items: NOTES_ITEMS },
     { id: "ops", title: "运营操作系统", desc: "反馈、申诉、看板与质检常用后台", type: "cards", items: OPS_ITEMS },
-    { id: "guide", title: "对商操作指南文件", desc: "以下为对商教育文档，需复制链接发给商家", type: "rows", copyable: true, items: GUIDES }
+    { id: "guide", title: "对商操作指南文件", desc: "以下为对商教育文档，需复制链接发给商家", type: "rows", copyable: true, scroll: true, items: GUIDES }
   ];
 
   var COMMON_TERMS = ["木制品", "仓库", "申诉", "图灵", "问卷", "加白"];
@@ -816,7 +824,7 @@
         });
         html += '</div></div>';
       } else if (m.type === "rows") {
-        html += '<div class="rows" data-rows="' + m.id + '">';
+        html += '<div class="rows' + (m.scroll ? ' scroll' : '') + '" data-rows="' + m.id + '">';
         m.items.forEach(function (it, i) {
           var isPage = !!it.page;
           var tgt = isPage ? 'data-page="' + esc(it.page) + '"' : 'data-url="' + esc(it.u) + '"';
