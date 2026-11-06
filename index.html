@@ -271,49 +271,6 @@
   }
 
 
-  /* 账号浮窗 */
-  .fab { position: fixed; right: 16px; bottom: 16px; z-index: 82; display: flex; flex-direction: column; align-items: flex-end; }
-  .fab-toggle {
-    display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 15px 0 6px;
-    border-radius: 999px; border: 1px solid rgba(240, 121, 30, .38);
-    background: var(--surface); cursor: pointer; font-family: inherit;
-    font-size: 12.5px; font-weight: 700; color: #B45510; letter-spacing: .2px; white-space: nowrap;
-    box-shadow: 0 6px 18px rgba(240, 121, 30, .22);
-    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-  }
-  .fab-toggle:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(240, 121, 30, .32); border-color: rgba(240, 121, 30, .7); }
-  .fab-ic {
-    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(155deg, #FFB86B 0%, #F0791E 72%); flex-shrink: 0;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45);
-  }
-  .fab-ic svg { width: 18px; height: 18px; display: block; }
-  .fab-toggle .fab-caret { font-size: 9px; color: #C9772E; opacity: .75; transition: transform .2s ease; }
-  .fab:has(.fab-panel.open) .fab-caret { transform: rotate(180deg); }
-  .fab:has(.fab-panel.open) .fab-toggle { border-color: rgba(240, 121, 30, .75); }
-  .fab-panel {
-    position: absolute; right: 0; bottom: 56px; width: 250px; padding: 14px 15px 15px;
-    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-    box-shadow: var(--shadow-hover); opacity: 0; pointer-events: none;
-    transform: translateY(6px); transition: all .18s ease;
-  }
-  .fab-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .fab-title { font-size: 13px; font-weight: 700; }
-  .fab-sub { font-size: 11.5px; color: var(--text-muted); margin: 3px 0 10px; }
-  .fab-row { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 4px 0; }
-  .fab-row > span:first-child { color: var(--text-muted); flex-shrink: 0; }
-  .fab-row > span:last-child { font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-  .fab-copy {
-    border: none; background: var(--chip-bg); color: var(--accent); font-family: inherit;
-    font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 5px; cursor: pointer;
-  }
-  .fab-copy:hover { background: var(--accent-soft); }
-  .fab-btn {
-    display: block; text-align: center; margin-top: 10px; padding: 8px 0; border-radius: 9px;
-    background: var(--accent); color: #fff; font-size: 12.5px; font-weight: 600; text-decoration: none;
-  }
-  .fab-btn:hover { background: var(--accent-2); }
-
   footer { margin-top: 44px; text-align: center; font-size: 12px; color: var(--text-faint); }
   .hidden { display: none !important; }
 
@@ -363,30 +320,6 @@
   </div>
 
   <div id="page-view"></div>
-</div>
-
-<div class="fab">
-  <div class="fab-panel" id="fab-panel">
-    <div class="fab-title">🧪 店铺测试账号</div>
-    <div class="fab-sub">用于卖家中心功能验证</div>
-    <div class="fab-row"><span>子账号</span><span>728842485@qq.com<button class="fab-copy" data-copy="728842485@qq.com">复制</button></span></div>
-    <div class="fab-row"><span>密码</span><span>wujin@123<button class="fab-copy" data-copy="wujin@123">复制</button></span></div>
-    <a class="fab-btn" href="https://seller.kuajingmaihuo.com/login?redirectUrl=https%3A%2F%2Fseller.kuajingmaihuo.com%2F" target="_blank" rel="noopener noreferrer">进入卖家中心</a>
-  </div>
-  <button class="fab-toggle" id="fab-toggle" title="店铺测试账号" aria-label="店铺测试账号">
-    <span class="fab-ic">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M4 10.2V19a1.2 1.2 0 0 0 1.2 1.2h4.1v-4.6h5.4v4.6h4.1A1.2 1.2 0 0 0 20 19v-8.8"
-              stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M3.1 10.2 4.6 4.9A1.2 1.2 0 0 1 5.8 4h12.4a1.2 1.2 0 0 1 1.2.9l1.5 5.3"
-              stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M3.1 10.2a2.5 2.5 0 0 0 4.4 1.4 2.5 2.5 0 0 0 4.5 0 2.5 2.5 0 0 0 4.5 0 2.5 2.5 0 0 0 4.4-1.4"
-              stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-    <span class="fab-label">店铺测试账号</span>
-    <span class="fab-caret">▾</span>
-  </button>
 </div>
 
 <div id="toast"></div>
@@ -958,9 +891,6 @@
 
   // ===================== 事件代理 =====================
   document.addEventListener("click", function (e) {
-    var copyBtn = e.target.closest(".fab-copy");
-    if (copyBtn) { e.preventDefault(); copyText(copyBtn.getAttribute("data-copy")); return; }
-
     var linkCopy = e.target.closest("[data-copyurl]");
     if (linkCopy) { e.preventDefault(); copyText(linkCopy.getAttribute("data-copyurl")); return; }
 
@@ -1169,9 +1099,6 @@
     var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
     try { localStorage.setItem("ops-center-theme", next); } catch (e) {}
-  });
-  document.getElementById("fab-toggle").addEventListener("click", function () {
-    document.getElementById("fab-panel").classList.toggle("open");
   });
 
   // ===================== 初始化 =====================
