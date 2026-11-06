@@ -704,9 +704,9 @@
   var MODULES = [
     { id: "notice", title: "最新通知", desc: "如本页面未展示最新内容，可使用 Ctrl+F5 刷新", type: "notice" },
     { id: "survey", title: "问卷", desc: "申请与信息提交", type: "cards", items: [
-      { n: "下单问卷", s: "需按照格式填写SKUID+数量，需复制链接发给商家", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=235094639557", ic: "📋", tag: "调查问卷", copy: true }
+      { n: "下单问卷", s: "需按照格式填写SKUID+数量，需复制链接发给商家", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=235094639557", ic: "📋", copy: true }
     ] },
-    { id: "note", title: "常用 note", desc: "标签合规、加白解标、仓库与店铺对接", type: "rows", items: NOTES_ITEMS },
+    { id: "note", title: "常用 note及文件", desc: "标签合规、加白解标、仓库与店铺对接", type: "rows", items: NOTES_ITEMS },
     { id: "ops", title: "运营操作系统", desc: "反馈、申诉、看板与质检常用后台", type: "cards", items: OPS_ITEMS },
     { id: "guide", title: "对商操作指南文件", desc: "以下为对商教育文档，需复制链接发给商家", type: "rows", copyable: true, items: GUIDES }
   ];
@@ -977,11 +977,11 @@
   var PAGE_TRAILS = {
     notice_penalty: "最新通知 / 数量不符违规点透传功能已上线",
     notice_oversea: "最新通知 / 支持商家自主申请海外仓备货",
-    warehouse: "常用 note / 仓库异常对接人指引",
-    store: "常用 note / 店铺商家 / 入驻 / 主体 / 退店问题",
-    usrecall: "常用 note / 美国站点回捞指南",
-    wood: "常用 note / 美国站点回捞指南 / PGA 木制品释放流程",
-    manufacturer: "常用 note / 制造商名称整改指南",
+    warehouse: "常用 note及文件 / 仓库异常对接人指引",
+    store: "常用 note及文件 / 店铺商家 / 入驻 / 主体 / 退店问题",
+    usrecall: "常用 note及文件 / 美国站点回捞指南",
+    wood: "常用 note及文件 / 美国站点回捞指南 / PGA 木制品释放流程",
+    manufacturer: "常用 note及文件 / 制造商名称整改指南",
     brook: "运营操作系统 / 商品流量 case 排查需求（Brook）"
   };
 
@@ -991,16 +991,13 @@
     MODULES.forEach(function (m) {
       if (m.type === "notice") {
         NOTICES.forEach(function (n) {
-          var hay = (m.title + " " + n.title).toLowerCase();
-          if (n.page && PAGES[n.page]) hay += " " + collectText(PAGES[n.page].blocks).toLowerCase();
-          INDEX.push({ label: n.title, trail: m.title, url: n.url, page: n.page, hay: hay });
+          INDEX.push({ label: n.title, trail: m.title, url: n.url, page: n.page, hay: n.title.toLowerCase() });
         });
         return;
       }
       (m.items || []).forEach(function (it) {
-        var hay = (it.n + " " + (it.s || "") + " " + (it.tag || "") + " " + m.title).toLowerCase();
-        if (it.page) { hay += " " + collectText(PAGES[it.page].blocks).toLowerCase(); seenPages[it.page] = true; }
-        INDEX.push({ label: it.n, trail: m.title, url: it.u, page: it.page, hay: hay });
+        if (it.page) seenPages[it.page] = true;
+        INDEX.push({ label: it.n, trail: m.title, url: it.u, page: it.page, hay: it.n.toLowerCase() });
       });
     });
     Object.keys(PAGES).forEach(function (pid) {
@@ -1010,7 +1007,7 @@
         label: p.title,
         trail: PAGE_TRAILS[pid] || "分页",
         page: pid,
-        hay: (p.title + " " + (p.desc || "") + " " + collectText(p.blocks)).toLowerCase()
+        hay: p.title.toLowerCase()
       });
     });
   }
@@ -1027,13 +1024,15 @@
       if (old) old.remove();
       return;
     }
-    var words = [q];
-    if (SYNONYMS[q]) words = SYNONYMS[q].concat([q]);
-
-    var hits = INDEX.filter(function (it) {
-      for (var i = 0; i < words.length; i++) if (it.hay.indexOf(words[i]) >= 0) return true;
-      return false;
-    });
+    // 仅按标题匹配；标题无命中时才用同义词兜底
+    var hits = INDEX.filter(function (it) { return it.hay.indexOf(q) >= 0; });
+    if (!hits.length && SYNONYMS[q]) {
+      var words = SYNONYMS[q];
+      hits = INDEX.filter(function (it) {
+        for (var i = 0; i < words.length; i++) if (it.hay.indexOf(words[i]) >= 0) return true;
+        return false;
+      });
+    }
 
     var old2 = document.getElementById("search-results");
     if (old2) old2.remove();
