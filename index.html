@@ -222,6 +222,7 @@
   .lrow-s { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-top: 3px; }
   .lrow-u { font-size: 11px; color: var(--text-faint); margin-top: 5px; word-break: break-all; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   .lrow-a { color: var(--text-faint); font-size: 13px; margin-top: 2px; }
+  .lrow-copy { align-self: center; margin-left: 6px; }
   .lrow:hover .lrow-a { color: var(--accent); }
   .filrow { cursor: pointer; border-style: dashed; }
   .filrow .lrow-a { font-weight: 700; font-size: 14px; }
@@ -643,10 +644,7 @@
   // ---- 最新通知 ----
   var NOTICES = [
     { title: "数量不符违规点透传功能已上线", date: "2026-11-06", page: "notice_penalty", added: "2026-11-06" },
-    { title: "支持商家自主申请海外仓备货", date: "2026-11-06", page: "notice_oversea", added: "2026-11-06" },
-    { title: "关于欧盟 / 英国进口商标签信息的最新通知", date: "2026-10-08", url: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=86282834360" },
-    { title: "常规店铺【发货享欧区流量增长】备货单专属权益及发货提醒", date: "2026-10-01", url: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=235094639557" },
-    { title: "内置电池类产品包装要求【最新版】", date: "2026-09-28", url: "https://agentseller.temu.com/main/course/detail?courseId=10817560811" }
+    { title: "支持商家自主申请海外仓备货", date: "2026-11-06", page: "notice_oversea", added: "2026-11-06" }
   ];
 
   // ---- 对商操作指南文件 ----
@@ -663,7 +661,9 @@
     { n: "欧盟 GPSR 新法规的欧代信息及标签要求（PDF）", u: "https://bdl.cdnfe.com/upload_bdl/temu-industrial-and-scientific/0d2ca6ec-6d9d-42a4-ae8e-ecedc1ffdec4.pdf" },
     { n: "常规店铺商家到货异常及退货规则（PDF）", u: "https://bdl.cdnfe.com/upload_bdl/temu-industrial-and-scientific/714be915-c587-4403-8cc0-a6ad7fad6400.pdf" },
     { n: "含焊丝、焊条、焊棒、焊电极商品的上架条件", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=165992910143" },
-    { n: "禁售政策之电动工具及配件的非预期用途", u: "https://agentseller.temu.com/main/course/detail?courseId=10817560811" }
+    { n: "禁售政策之电动工具及配件的非预期用途", u: "https://agentseller.temu.com/main/course/detail?courseId=10817560811" },
+    { n: "内置电池类产品包装要求【最新版】", u: "https://agentseller.temu.com/main/course/detail?courseId=10817560811" },
+    { n: "常规店铺【发货享欧区流量增长】备货单专属权益及发货提醒", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=235094639557" }
   ];
 
   // ---- 常用 note 模块（一行式） ----
@@ -861,6 +861,7 @@
               (it.s ? '<div class="lrow-s">' + esc(it.s) + '</div>' : '') +
               (it.u ? '<div class="lrow-u">' + esc(it.u) + '</div>' : '') +
             '</div>' +
+            (it.u ? '<button class="row-copy lrow-copy" data-copyurl="' + esc(it.u) + '">复制链接</button>' : '') +
             '<div class="lrow-a">' + (isPage ? "›" : "↗") + '</div>' +
           '</div>';
         });
