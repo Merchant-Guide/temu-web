@@ -636,6 +636,30 @@
     ]
   };
 
+  // ---- 分页：通知 - 欧盟零毁林资质要求 ----
+  var P_NOTICE_EUDR = {
+    title: "欧盟零毁林资质要求",
+    desc: "欧盟零毁林（EUDR）资质入口已提前开通，当前仅展示资质提交，短期无需加白豁免。",
+    blocks: [
+      { t: "h", v: "背景" },
+      { t: "p", v: "欧盟零毁林（EUDR）法规禁止在欧盟销售七种商品（牛肉、可可、咖啡、棕榈油、橡胶、大豆和木材）以及由此类商品制成的商品；除非这些商品是零毁林、且是根据生产国家/地区的所有相关法律（包括环境法和人权法）生产的，否则这些商品不能在欧盟销售。" },
+      { t: "links", v: [
+        { n: "欧盟零毁林（EUDR）法规原文（EUR-Lex）", u: "https://eur-lex.europa.eu/eli/reg/2023/1115/oj", s: "Regulation (EU) 2023/1115" }
+      ] },
+      { t: "h", v: "商家教育材料" },
+      { t: "links", v: [
+        { n: "平台商家教育", u: "https://agentseller.temu.com/main/course/detail?courseId=2501030000818&requestId=d225815da0774d45a393c7c1c6caa69b4851161528948" },
+        { n: "亚马逊商家教育：零毁林商品法规（EUDR）", u: "https://sellercentral.amazon.fr/help/hub/reference/external/GU6MAG9H6WCAG2UV?mons_sel_locale=zh_CN" }
+      ] },
+      { t: "h", v: "当前进展（截至 2026.11.3）" },
+      { t: "ul", v: [
+        "欧盟零毁林已提前开通资质入口，便于有资质的商家上传；当前无任何实时处罚生效，设定为极高 GMV 校验 + 延迟 365 天处罚",
+        "吉娜组被初步圈品的类目总计 174 个，行业同学知悉；后续将进行策略实时打标管控，标签名称：EPR 标签/EUDR(零毁林)",
+        "注：短期内无需操作任何加白豁免，目前设定为仅展示资质入口供商家提交，不提交也不会有处罚"
+      ] }
+    ]
+  };
+
   var PAGES = {
     warehouse: P_WAREHOUSE,
     store: P_STORE,
@@ -645,11 +669,13 @@
     brook: P_BROOK,
     notice_penalty: P_NOTICE_PENALTY,
     notice_oversea: P_NOTICE_OVERSEA,
+    notice_eudr: P_NOTICE_EUDR,
     cate: P_CATE
   };
 
   // ---- 最新通知 ----
   var NOTICES = [
+    { title: "欧盟零毁林资质要求", date: "2026-11-06", page: "notice_eudr", added: "2026-11-06" },
     { title: "数量不符违规点透传功能已上线", date: "2026-11-06", page: "notice_penalty", added: "2026-11-06" },
     { title: "支持商家自主申请海外仓备货", date: "2026-11-06", page: "notice_oversea", added: "2026-11-06" }
   ];
@@ -657,7 +683,7 @@
   // ---- 对商操作指南文件 ----
   var GUIDES = [
     { n: "抽检不合格如何拦截退货 / 整改", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=31701076788" },
-    { n: "说明书必看内容", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=49872806148" },
+    { n: "说明书必看内容", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=249786557136" },
     { n: "欧代即将到期？如何处理，不影响商品入库和正常销售（英代 / 土代同样适用）", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=74397438249" },
     { n: "流量异常，商家自行申请解绑非同款流程", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=77451598606" },
     { n: "店铺在商品上新时多次发生违规行为整改", u: "https://seller.kuajingmaihuo.com/questionnaire?surveyId=86282834360" },
@@ -985,6 +1011,7 @@
   var PAGE_TRAILS = {
     notice_penalty: "最新通知 / 数量不符违规点透传功能已上线",
     notice_oversea: "最新通知 / 支持商家自主申请海外仓备货",
+    notice_eudr: "最新通知 / 欧盟零毁林资质要求",
     warehouse: "常用 note及文件 / 仓库异常对接人指引",
     store: "常用 note及文件 / 店铺商家 / 入驻 / 主体 / 退店问题",
     usrecall: "常用 note及文件 / 美国站点回捞指南",
